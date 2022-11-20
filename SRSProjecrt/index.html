@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Webpage description goes here" />
+    <meta charset="utf-8">
+    <title>Change_me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <style>
+        body {
+            background-color: black;
+            color: white
+        }
+
+        button {
+            border: white 2px solid
+        }
+
+        #pageNum {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            border: white 2px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="file" name="file" id="file">
+    </div>
+
+    <div id="page">
+
+    </div>
+
+    <div id="text">
+
+    </div>
+
+    <div id="page2">
+
+    </div>
+
+    <div id="pageNum">
+        
+    </div>
+
+    <script type="text/javascript">
+        // <![CDATA[
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+        // ]]>
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        var storyLines = [];
+        document.getElementById('file').onchange = function () {
+            var bar = document.getElementById('page');
+            var bar2 = document.getElementById('page2')
+
+            //readTextFile("C:\\Users\\Christfel\Downloads\아카데미+야겜에+빙의했다+1-353+19N.txt");
+            var file = this.files[0];
+
+            var reader = new FileReader();
+            reader.onload = function (progressEvent) {
+                // Entire file
+                //console.log(this.result);
+
+                // By lines
+                var lines = this.result.split('\n');
+                var size = lines.length;
+
+                for (var line = 0; line < lines.length; line++) {
+                    storyLines[line] = lines[line];
+                }
+                var numsize = Math.ceil(size / 1500);
+                window.localStorage.setItem('number', numsize);
+            };
+
+            var num = window.localStorage.getItem('number');
+            console.log(num)
+
+            for (var x = 0; x < num; x++) {
+                const button = document.createElement('button');
+                button.innerText = x + 1;
+                button.id = x;
+                button.setAttribute("onclick", "page(this.id);")
+                button.setAttribute("type", "button")
+
+                const button2 = document.createElement('button');
+                button2.innerText = x + 1;
+                button2.id = x;
+                button2.setAttribute("onclick", "page(this.id);")
+                button2.setAttribute("type", "button")
+
+
+                bar.appendChild(button);
+                bar2.appendChild(button2);
+            }
+            reader.readAsText(file);
+
+            document.getElementById('pageNum').textContent = "1";
+            
+        };
+
+        function page(clicked_id) {
+            var value = clicked_id;
+
+            var textBody = document.getElementById('text');
+            textBody.innerText = '';
+
+            var pageNumber = document.getElementById('pageNum');
+            pageNumber.innerText = parseInt(value) + 1
+
+            console.log(value)
+            console.log(parseInt(value) * 1500)
+            console.log(((parseInt(value) + 1) * 1500))
+
+            for (var line = parseInt(value) * 1500; line < ((parseInt(value) + 1) * 1500); line++) {
+                const span = document.createElement("p");
+                span.setAttribute("class", "sr-only");
+                span.textContent = storyLines[line];
+                span.textContent += "\n"
+                textBody.appendChild(span)
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "d") {
+                var value = parseInt(document.getElementById('pageNum').textContent) + 1
+
+                var textBody = document.getElementById('text');
+                textBody.innerText = '';
+
+                var pageNumber = document.getElementById('pageNum');
+                pageNumber.innerText = parseInt(value)
+
+                console.log(value)
+                console.log(parseInt(value) * 1500)
+                console.log(((parseInt(value) + 1) * 1500))
+
+                for (var line = parseInt(value) * 1500; line < ((parseInt(value) + 1) * 1500); line++) {
+                    const span = document.createElement("p");
+                    span.setAttribute("class", "sr-only");
+                    span.textContent = storyLines[line];
+                    span.textContent += "\n"
+                    textBody.appendChild(span)
+                }
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            if (event.key === "a") {
+                var value = parseInt(document.getElementById('pageNum').textContent) - 1
+
+                var textBody = document.getElementById('text');
+                textBody.innerText = '';
+
+                var pageNumber = document.getElementById('pageNum');
+                pageNumber.innerText = parseInt(value)
+
+                console.log(value)
+                console.log(parseInt(value) * 1500)
+                console.log(((parseInt(value) + 1) * 1500))
+
+                for (var line = parseInt(value) * 1500; line < ((parseInt(value) + 1) * 1500); line++) {
+                    const span = document.createElement("p");
+                    span.setAttribute("class", "sr-only");
+                    span.textContent = storyLines[line];
+                    span.textContent += "\n"
+                    textBody.appendChild(span)
+                }
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>
