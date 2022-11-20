@@ -128,7 +128,7 @@ async function main() {
     }
 
     alert('done')
-    window.location.href = '/HtmlFiles/index.html'
+    window.location.href = 'index.html'
 }    
 
 main()
