@@ -1,0 +1,39 @@
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: 'Source Sans Pro';
+}
+
+#question {
+    height: 47vh;
+    width: 98vw;
+    background-color: #5EC2B9;
+}
+
+#ansField {
+    height: 10vh;
+    width: 98vw;
+}
+
+#userAns {
+    height:100%;
+    width: 100%;
+    font-size: 6vh;
+    text-align: center;
+}
+
+#ans {
+    height: 40vh;
+    width: 98vw;
+    background-color: #72BC70;
+}
+
+#correctAns {
+    height:10%;
+    width: 40%;
+    font-size: 4vh;
+    text-align: center;
+}
+
+
